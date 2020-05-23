@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="masthead">
+   
+</section>
+<div class="container pt-5">
+    <form method="POST">
+        {% csrf_token %}
+
+        <div id="traderobot" class="card bg-white border-none">
+            <div class="card-body p-5">
+                <div class="row">
+                    <div id="trstock" class="col-md-7 col-sm-12 my-auto">
+                        <h2 class="text-center">Select stocks</h2>
+                        <hr>
+                        <div style='text-align:center; margin: 0 0; margin-top:1em;display:block;'>
+                            <select name="trstocks" class="ui selection dropdown w-100" placeholder="Select" multiple="" id="multi-select">
+                                <option value="">Select</option>
+                                {% for s in stocks %}
+                                <option value={{s.0}}>{{s.1}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="img">
+                            <img class="img-fluid" src="{% static '/img/trader1.png' %}" alt="">
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="img">
+                            <img class="img-fluid" src="{% static '/img/trader2.png' %}" alt="">
+                        </div>
+                    </div>
+                    <div id="trdate" class="col-md-7 col-sm-12 my-auto">
+                        <h2 class="text-center">Select dates</h2>
+                        <hr>
+                        <div class="form-group " style="margin-top:15px;">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="input">
+                                        <input type="text" autocomplete="off" placeholder="From date" name="trdate1"
+                                            class="form-control date-picker datepickers" id="date-picker"
+                                            />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="input">
+                                        <input autocomplete="off" type="text" placeholder="To date" name="trdate2"
+                                            class="form-control date-picker-2 datepickers" id="date date-picker-2"
+                                            />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="trbudget" class="col-md-12 col-sm-12 mt-5">
+                        <h2 class="text-center">Specify your budget</h2>
+                        <hr>
+                        <div>
+                            <input name="trbudget" type="range" min="5000" max="100000" step="5000" value="100">
+                            <output class="output"></output>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-warning btn-lg mt-3">SIMULATE</button>
+        </div>
+    </form>
+</div>
+
+
+{% endblock content %}

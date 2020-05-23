@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<!-- Header -->
+<header class="masthead">
+  <div class="container h-100 ">
+    <!-- <h1 class="mx-auto my-0 text-uppercase">THATS YOUR GRAPH</h1> -->
+    <div class="row pt-5">
+      <div class="col-md-9 col-sm-12" style="flex: 1;">
+        <div class="mx-auto bg-transparent text-center">
+          {% autoescape off %}
+          {{ div  }}
+          {% endautoescape %}
+        </div>
+      </div>
+      <div class="col-md-3  p-0 bg-light col-sm-12 " style="flex: 1;display: flex;flex-direction: column;">
+        <div class="text-center p-3 ">
+          <h2 class="font-weight-lighter">SCORES</h2>
+          <hr style="width: 50%; border-width: 0.2rem;border-color:#2CBAB2;">
+        </div>
+        <div id="scores" style="flex-grow:1;">
+          <div class="text-center h-25 p-2" style="background: #F2F2F2;">
+            <h4>R2</h4>
+            {% if errors.R2 is None %}-{% else %}{{errors.R2}}{% endif %}
+          </div>
+          <div class="text-center h-25 p-2" style="background: #FFF;">
+            <h4>MSE</h4>
+            {% if errors.MSE is None %}-{% else %}{{errors.MSE}}{% endif %}
+          </div>
+          <div class="text-center h-25 p-2" style="background: #F2F2F2;">
+            <h4>RMSE</h4>
+            {% if errors.RMSE is None %}-{% else %}{{errors.RMSE}}{% endif %}
+          </div>
+          <div class="text-center h-25 p-2" style="background: #FFF;">
+            <h4>SMAPE</h4>
+            {% if errors.SMAPE is None %}-{% else %}{{errors.SMAPE}}{% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+
+{% endblock content %}

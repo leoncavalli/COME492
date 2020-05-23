@@ -1,0 +1,46 @@
+@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600);
+
+.stat{
+    background-color: white;
+    transition: 0.5s;
+    font-family: 'Source Sans Pro',sans-serif;
+}
+.stat:hover{ 
+    color: white;
+    background: #4fa584;
+    transform: scale(1.1);
+    transition-property: transform, background;
+    transition-duration: 0.3s;
+    position: relative;
+    z-index: 1;
+}
+.statvalue{
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+.chart {
+  position: relative;
+  display: inline-block;
+  font-size: 14px;
+  text-align: center;
+}
+.chart canvas {
+  top: 0;
+  left: 0;
+}
+.chart span{
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: block;
+    position: absolute;
+}
+@media(max-width:700px){
+.chart canvas{
+  width: 102px!important;
+  height: auto!important;
+}
+.statvalue{
+  font-size: 1rem;
+
+}}

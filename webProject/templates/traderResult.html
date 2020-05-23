@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<section class="masthead">
+    <div class="container">
+        <div class="row p-5">
+            <div class="col-md-4 col-sm-12  mb-2">
+                <div class="p-3  stat text-center">
+                    <h3 class="font-weight-light">Initial Budget</h3>
+                    <hr>
+                    <span class="statvalue">{{trbudget}}</span>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-12  mb-2">
+                <div class="p-3 stat text-center">
+                    <h3 class="font-weight-light">Final Budget</h3>
+                    <hr>
+                    <span class="statvalue">{{finalBudget}}</span>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-12  mb-2">
+                <div class="p-3  stat text-center">
+                    <h3 class="font-weight-light">Portfolio Value</h3>
+                    <hr>
+                    <span class="statvalue"></span>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-sm-12 mt-3">
+                <div class="p-3 stat text-center">
+                    <h3 class="font-weight-light">Profit</h3>
+                    <hr>
+                    <div class="chart" id="profitchart" data-percent="0"><span class="statvalue">47%</span></div>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-12 mt-3">
+                <div class="p-3 stat text-center h-100">
+                    <h3 class="font-weight-light">Profit</h3>
+                    <hr>
+                    <div id="chartjs-wrapper"><canvas id="myChart"></canvas></div>
+                </div>
+
+            </div>
+        </div>
+</section>
+<script>
+    var latestPrice = "{{latestPrice}}";
+    var cash = "{{cash}}";
+    var finalportfolio = "{{finalPortfolio}}";
+    var latests="{{latests}}";
+</script>
+
+{% endblock content %}

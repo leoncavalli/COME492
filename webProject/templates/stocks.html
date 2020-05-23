@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+
+<section class="masthead">
+  <div class="container p-5" id="livestock">
+    <div class="row">
+      <div class="col-md-12 d-flex">
+        <div class="w-75" style='text-align:center; margin: 0 0; margin-top:1em;display:block;'>
+          <select name="stock" class="ui dropdown w-100 text-center" id="selecto">
+            <option value="">Select</option>
+            {% for s in stocks %}
+            <option value={{s.0}}>{{s.1}}</option>
+            {% endfor %}>
+          </select>
+        </div>
+        <div style="flex-direction: column;">
+        <button  type="submit" class="sqgrbtn" id="stckPgBtn">SUBMIT</button>
+      </div>
+      </div>
+      <!-- TradingView Widget BEGIN -->
+      <div class="col-md-12">
+        <div class="tradingview-widget-container mt-4">
+          <div id="tradingview_0cb0e" style="height: 60vh;"></div>
+          <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script> 
+        </div>
+        <!-- TradingView Widget END -->
+      </div>
+    </div>
+
+  </div>
+
+</section>
+
+{% endblock content %}

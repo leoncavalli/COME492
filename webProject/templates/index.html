@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+  <!-- Header -->
+  <header class="masthead">
+    <div class="container d-flex h-100">
+      <div class="text-left col-lg-7">
+        <h1 class="mx-auto my-0 ">We are developing financial AI.<h1>
+    </div>
+    <div class="sonar-wrapper col-lg-5">
+      <div class="sonar-emitter text-center"><a class="d-inline-block btn text-white" href="/choosemodel">Try Our Models</a>
+        <div class="sonar-wave"></div>
+      </div>
+    </div> 
+   </header>
+
+  <!-- About Section -->
+ 
+
+  </section>
+  <section id="about" class="about-section text-center">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 text-center mx-auto">
+          <h2 class="text-white mb-4 font-weight-bold">What is Fin AI?</h2>
+          <hr  style="width:30%;background-color:#64a19d;border-width: 0.25rem;">
+          <p class="text-white mx-auto" ><b>Fin AI</b> is an abbreviaton of Finance on Artificial Intelligence.We are creating machine learning
+             models to see the effects of AI in finance markets.Get more details from <span class="text-primary"><b>here</b></span>.
+          
+          
+          </p>
+        </div>
+      </div>
+      <img src="{% static 'img/bgg.png' %}" class="img-fluid" alt="">
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects" class="projects-section bg-light">
+    <div class="container">
+
+      <!-- Featured Project Row -->
+      <div class="row align-items-center no-gutters mb-4 mb-lg-5">
+        <div class="col-xl-8 col-lg-7">
+          <img class="img-fluid mb-3 mb-lg-0" src="{% static 'img/bg-masthi.jpg' %}" alt="">
+        </div>
+        <div class="col-xl-4 col-lg-5">
+          <div class="featured-text text-center text-lg-left">
+            <h4></h4>
+            <p class="text-black-50 mb-0">Financial Artificial Intelligence is</p>
+          </div>
+        </div>
+      </div>
+
+   
+  </section>
+
+  
+ 
+  
+{% endblock content %}
