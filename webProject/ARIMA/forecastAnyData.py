@@ -107,15 +107,28 @@ def trainTestForecast(stock,fromdate,todate,period,metrics):
     err=Metrics(predictions,test).run()
     errors={k:err[k] for k in metrics if k in err}
     fig = go.Figure()
-    fig.add_trace(go.Scatter(x=list(data.index), y=data.values,line_color='deepskyblue',name="Actual"))
-    fig.add_trace(go.Scatter(x=list(predictions.index), y=predictions,line_color='red',name="Forecast"))
+    trace0=go.Scatter(x=list(data.index), y=data.values,line_color='deepskyblue',name="Actual")
+    trace1=go.Scatter(x=list(predictions.index), y=predictions,line_color='red',name="Forecast")
+    fig.add_trace(trace0)
+    fig.add_trace(trace1)   
     fig.update_layout(
         title_text=stock+ " FORECAST MODEL",
         xaxis_title = "Dates",
         yaxis_title = "Close Price",
     )
+    data=[trace0,trace1]
+    myfigure=go.Figure(data=data)
+
+    myfigure.update_layout(
+        margin=dict(l=20, r=0, t=80, b=20),
+        title_text=stock+ " FORECAST MODEL",
+        xaxis_title = "Dates",
+        yaxis_title = "Close Price",
+        
+    )
+    myfigurejson=myfigure.to_json()
     plot=plotly.offline.plot(fig,output_type='div')
-    return plot,errors
+    return myfigurejson,errors
 
 
 

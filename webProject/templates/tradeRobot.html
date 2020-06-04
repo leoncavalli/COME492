@@ -3,7 +3,33 @@
 
 {% block content %}
 <section class="masthead">
-   
+    <div class="container p-5">
+        <div class="col-lg-12 text-center mx-auto">
+            <h2 class="text-white mb-4 font-weight-bold">Trade Robot</h2>
+            <hr style="width:30%;background-color:#64a19d;border-width: 0.25rem;">
+            <div class="bg-light text-black p-5">
+                <p class=" mx-auto" style="font-size: 1.8rem;"><b>Trade Robot</b> is an simulator which makes buys and
+                    sells according to
+                    technical indicators and various algorithms.</p>
+                    <hr>
+                <div class="col-md-12 mx-auto">
+                    <ul class=" text-left" style="font-size: 1.5rem;">
+                        <li class="mx-auto">
+                            
+                                <p>Choose the stocks you want to invest.</p>
+                        </li>
+                        <li >
+                                <p>Specify the dates that robot will simulate.</p>
+                       </li>
+                        <li >
+                                <p>Set your budget for initial.</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
 </section>
 <div class="container pt-5">
     <form method="POST">
@@ -16,7 +42,8 @@
                         <h2 class="text-center">Select stocks</h2>
                         <hr>
                         <div style='text-align:center; margin: 0 0; margin-top:1em;display:block;'>
-                            <select name="trstocks" class="ui selection dropdown w-100" placeholder="Select" multiple="" id="multi-select">
+                            <select name="trstocks" class="ui selection dropdown w-100" placeholder="Select" multiple=""
+                                id="multi-select">
                                 <option value="">Select</option>
                                 {% for s in stocks %}
                                 <option value={{s.0}}>{{s.1}}</option>
@@ -42,15 +69,13 @@
                                 <div class="col-md-6">
                                     <div class="input">
                                         <input type="text" autocomplete="off" placeholder="From date" name="trdate1"
-                                            class="form-control date-picker datepickers" id="date-picker"
-                                            />
+                                            class="form-control date-picker datepickers" id="date-picker" />
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="input">
                                         <input autocomplete="off" type="text" placeholder="To date" name="trdate2"
-                                            class="form-control date-picker-2 datepickers" id="date date-picker-2"
-                                            />
+                                            class="form-control date-picker-2 datepickers" id="date date-picker-2" />
                                     </div>
                                 </div>
                             </div>
@@ -71,6 +96,5 @@
         </div>
     </form>
 </div>
-
 
 {% endblock content %}

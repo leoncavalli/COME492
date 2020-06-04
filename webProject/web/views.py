@@ -7,34 +7,46 @@ from web import example
 from web import usdtry
 from ARIMA import bist30Arima
 from ARIMA import forecastAnyData
+from LSTM import lstm
 import json
 from django.shortcuts import render
 from . import forms
 from TradeRobot import trader
+from rest_framework.views import APIView
+from rest_framework.decorators import api_view,permission_classes
+from rest_framework.response import Response
+from rest_framework import status
+from django.http import JsonResponse
+from rest_framework.permissions import AllowAny
+import json
+
 
 class HomePageView(TemplateView):
     template_name = 'index.html'
-    
-
-
-
+ 
 def lstmview(request):
     stocks=forms.STOCK_CHOICES
     periods=forms.PERIODS
     metrics=forms.METRICS
     if request.method == 'POST':
         stocks = request.POST.get('stock')
+        trdate1 = request.POST.get('trdate1_')
+        trdate2 = request.POST.get('trdate2_')
         period = request.POST.get('period')
         request.session['name'] = stocks
+        request.session['trdate1_'] = trdate1
+        request.session['trdate2_'] = trdate2
         request.session['period'] = period
         return redirect('lstmForecast')
     return render(request,'lstm.html',context={'stocks':stocks,'periods':periods,'metrics':metrics})
     
-# def lstmForecast(request):
-#     stok = request.session['name']
-#     period = request.session['period']
-#     div = forecastAnyData.trainTestForecast(stok,, period,['metrics'])
-#     return render(request, 'arimaForecast.html', context={'div': div})
+def lstmForecast(request):
+    stok = request.session['name']
+    trdate1 = request.session['trdate1_']
+    trdate2 = request.session['trdate2_']
+    period = request.session['period']
+    div = lstm.lstmForecast(stok,trdate1,trdate2,period)
+    return render(request, 'lstmForecast.html', context={'div': div})
 
 def arimaview(request):
     stocks=forms.STOCK_CHOICES
@@ -115,4 +127,18 @@ def TradeRobotResult(request):
     latests=json.dumps(vals[3])
     template_name='traderResult.html'
     return render(request,template_name,context={'trbudget':trbudget,'cash':cash,'finalBudget':finalBudget,'finalPortfolio':finalPortfolio,'latests':latests})
-    del request.session
+
+@api_view(['POST'])
+def simpleapi(stockdata):
+    try:
+
+        data=json.loads(stockdata.body) 
+        stock=data['stock']
+        startDate=data['startDate']
+        endDate=data['endDate']
+        period=data['period']
+
+        values = forecastAnyData.trainTestForecast(stock,startDate,endDate,period,['R2'])
+        return Response(json.loads(values[0]))
+    except ValueError as e:
+        return Response(e.args[0],status.HTTP_400_BAD_REQUEST)
