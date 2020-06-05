@@ -120,10 +120,9 @@ def trainTestForecast(stock,fromdate,todate,period,metrics):
     myfigure=go.Figure(data=data)
 
     myfigure.update_layout(
-        margin=dict(l=20, r=0, t=80, b=20),
-        title_text=stock+ " FORECAST MODEL",
-        xaxis_title = "Dates",
-        yaxis_title = "Close Price",
+        showlegend=False,
+        margin=dict(l=25, r=25, t=80, b=40  ),
+      
         
     )
     myfigurejson=myfigure.to_json()
@@ -131,6 +130,49 @@ def trainTestForecast(stock,fromdate,todate,period,metrics):
     return myfigurejson,errors
 
 
+def trainTestForecastWeb(stock,fromdate,todate,period,metrics):
+    data=getData(stock,fromdate,todate,period)
+    dataValues=data.values
+    size = int(len(dataValues) * 0.90)
+    train, test = dataValues[0:size], dataValues[size:len(dataValues)]
+    history = [x for x in train]
+    predictions = list()
+    for t in range(len(test)):
+        model = ARIMA(history, order=(3,1,0))
+        model_fit = model.fit(disp=-1)
+        output = model_fit.forecast()
+        yhat = output[0]
+        predictions.append(yhat)
+        obs = test[t]
+        history.append(obs)
+        print('predicted=%f, expected=%f' % (yhat, obs))
+    predictions=np.ravel(predictions)
+    predictions=pd.Series(predictions,index=data[size:].index)
+    err=Metrics(predictions,test).run()
+    errors={k:err[k] for k in metrics if k in err}
+    fig = go.Figure()
+    trace0=go.Scatter(x=list(data.index), y=data.values,line_color='deepskyblue',name="Actual")
+    trace1=go.Scatter(x=list(predictions.index), y=predictions,line_color='red',name="Forecast")
+    fig.add_trace(trace0)
+    fig.add_trace(trace1)   
+    fig.update_layout(
+        title_text=stock+ " FORECAST MODEL",
+        xaxis_title = "Dates",
+        yaxis_title = "Close Price",
+    )
+    data=[trace0,trace1]
+    myfigure=go.Figure(data=data)
+
+    myfigure.update_layout(
+        margin=dict(l=20, r=0, t=80, b=50),
+        title_text=stock+ " FORECAST MODEL",
+        xaxis_title = "Dates",
+        yaxis_title = "Close Price",
+        
+    )
+    myfigurejson=myfigure.to_json()
+    plot=plotly.offline.plot(fig,output_type='div')
+    return plot,errors
 
 
 

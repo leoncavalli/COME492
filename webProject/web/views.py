@@ -45,7 +45,7 @@ def lstmForecast(request):
     trdate1 = request.session['trdate1_']
     trdate2 = request.session['trdate2_']
     period = request.session['period']
-    div = lstm.lstmForecast(stok,trdate1,trdate2,period)
+    div = lstm.lstmForecastWeb(stok,trdate1,trdate2,period)
     return render(request, 'lstmForecast.html', context={'div': div})
 
 def arimaview(request):
@@ -73,7 +73,7 @@ def forecast(request):
     trdate2 = request.session['trdate2']
     period = request.session['period']
     metric = request.session['metric']
-    values = forecastAnyData.trainTestForecast(stok,trdate1,trdate2,period,metric)
+    values = forecastAnyData.trainTestForecastWeb(stok,trdate1,trdate2,period,metric)
     div=values[0]
     errors=values[1]
     return render(request, 'arimaForecast.html', context={'div': div,'errors':errors})
@@ -131,14 +131,25 @@ def TradeRobotResult(request):
 @api_view(['POST'])
 def simpleapi(stockdata):
     try:
-
         data=json.loads(stockdata.body) 
         stock=data['stock']
         startDate=data['startDate']
         endDate=data['endDate']
         period=data['period']
-
         values = forecastAnyData.trainTestForecast(stock,startDate,endDate,period,['R2'])
         return Response(json.loads(values[0]))
+    except ValueError as e:
+        return Response(e.args[0],status.HTTP_400_BAD_REQUEST)
+
+@api_view(['POST'])
+def simpleapi2(stockdata):
+    try:
+        data=json.loads(stockdata.body) 
+        stock=data['stock']
+        startDate=data['startDate']
+        endDate=data['endDate']
+        period=data['period']
+        values = lstm.lstmForecast(stock,startDate,endDate,period)
+        return Response(json.loads(values))
     except ValueError as e:
         return Response(e.args[0],status.HTTP_400_BAD_REQUEST)

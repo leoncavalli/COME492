@@ -17,7 +17,9 @@ urlpatterns=[
     path('cryptos/',CryptoPage,name="CryptoPage"),
     path('traderobot/',TradeRobot,name="TradeRobot"),
     path('traderobot/results',TradeRobotResult,name="TradeRobotResult"),
-    path('simpleapi/',simpleapi)
+    path('simpleapi/',simpleapi),  
+    path('simpleapi2/',simpleapi2)
+
 
 
 
