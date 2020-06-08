@@ -25,7 +25,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'vxu5_7joskzoqnkche$())8+k8o9ku9wxl-#5r=k%%76q%#wpb'
-
+    
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -65,7 +65,7 @@ ROOT_URLCONF = 'webProject.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [r'C:\djangoProject\webProject\templates'],
+        'DIRS': [r'C:\Users\bunya\OneDrive\Belgeler\GitHub\COME492\webProject\templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

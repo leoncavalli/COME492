@@ -5,7 +5,8 @@ from statsmodels.tsa.api import ExponentialSmoothing, SimpleExpSmoothing, Holt
 import matplotlib.pyplot as plt
 import statsmodels.api as sm
 from talib import RSI
-
+from TradeRobot.whatsapp import send_message
+import time
 
 def getData(stock, fromdate, todate):
     data = inv.get_stock_historical_data(stock=stock,
@@ -120,10 +121,9 @@ class Robot:
             boughtCount = int(self.budget * 0.15 / currentPrice)
             self.budget = int(self.budget - boughtCount * currentPrice)
             self.Portfolio[symbol] = self.Portfolio[symbol] + boughtCount
-            print(str(boughtCount) + " stock bought.")
-            print("Your budget is now " + str(self.budget) + " your portfolio " + str(
-                self.Portfolio) + "your cash : " + str(self.cash))
-            print("***************")
+            message="Date is: "+str(data.index[i])+"\n"+"Stock is: "+str(symbol)+"\n"+"Price is: "+str(currentPrice)+"\n"+"Stock bought: "+str(boughtCount)+"\n"+"Your budget is now: "+str(self.budget)+"\n"+ "Your portfolio: "+str(self.Portfolio)+"\n"+"Your cash: "+str(self.cash)
+            send_message(message)
+        
         else:
             print("No enough money in account.")
             print("Your budget is now " + str(self.budget) + " your portfolio " + str(
@@ -137,10 +137,8 @@ class Robot:
                 sellPiece = self.Portfolio[symbol]
                 self.Portfolio[symbol] = self.Portfolio[symbol] - sellPiece
                 self.budget = int(self.budget + currentPrice * sellPiece)
-                print(str(sellPiece) + "of" + symbol + " stock sold.")
-                print("Your budget is now " + str(self.budget) + " your portfolio " + str(
-                    self.Portfolio) + "your cash : " + str(self.cash))
-                print("************")
+                message="Date is: "+str(data.index[i])+"\n"+"Stock is: "+str(symbol)+"\n"+"Price is: "+str(currentPrice)+"\n"+"Stock bought: "+str(sellPiece)+"\n"+"Your budget is now: "+str(self.budget)+"\n"+"Your portfolio: "+str(self.Portfolio)+"\n"+"Your cash: "+str(self.cash)
+                send_message(message)
                 self.checkCash()
                 self.latestBoughts[symbol] = []
             else:
@@ -163,6 +161,7 @@ class Robot:
                     self.buy(datas[s], i, s)
                 elif sgn.sellsignalSMA() | sgn.sellsignalRSI():
                     self.sell(datas[s], i, s)
+                time.sleep(.3)
         latests = self.getLastPrice(datas)
         return self.budget, self.Portfolio, self.cash, latests
 
