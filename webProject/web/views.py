@@ -153,3 +153,16 @@ def simpleapi2(stockdata):
         return Response(json.loads(values))
     except ValueError as e:
         return Response(e.args[0],status.HTTP_400_BAD_REQUEST)
+
+@api_view(['POST'])
+def simpleapi3(stockdata):
+    try:
+        data=json.loads(stockdata.body)
+        stocks=data['selectedItems']
+        budget=data['budget']
+        app = trader.Robot(stocks,int(budget))
+        values=app.run()  
+        jsondata=json.dumps({'budget':values[0],'portfolio':values[1],'cash':values[2],'latests':values[3]})
+        return Response(json.loads(jsondata))
+    except ValueError as e:
+        return Response(e.args[0],status.HTTP_400_BAD_REQUEST)

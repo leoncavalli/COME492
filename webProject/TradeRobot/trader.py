@@ -103,7 +103,7 @@ class Robot:
     def getStockData(self):
         stocks = {p: None for p in self.stocks}
         for i in range(len(self.stocks)):
-            stok = getData(self.stocks[i], fromdate='01/01/2019', todate='01/01/2020')
+            stok = getData(self.stocks[i], fromdate='01/04/2019', todate='01/01/2020')
             stocks[self.stocks[i]] = stok
 
         return stocks
@@ -122,7 +122,7 @@ class Robot:
             self.budget = int(self.budget - boughtCount * currentPrice)
             self.Portfolio[symbol] = self.Portfolio[symbol] + boughtCount
             message="Date is: "+str(data.index[i])+"\n"+"Stock is: "+str(symbol)+"\n"+"Price is: "+str(currentPrice)+"\n"+"Stock bought: "+str(boughtCount)+"\n"+"Your budget is now: "+str(self.budget)+"\n"+ "Your portfolio: "+str(self.Portfolio)+"\n"+"Your cash: "+str(self.cash)
-            send_message(message)
+            # send_message(message)
         
         else:
             print("No enough money in account.")
@@ -138,7 +138,7 @@ class Robot:
                 self.Portfolio[symbol] = self.Portfolio[symbol] - sellPiece
                 self.budget = int(self.budget + currentPrice * sellPiece)
                 message="Date is: "+str(data.index[i])+"\n"+"Stock is: "+str(symbol)+"\n"+"Price is: "+str(currentPrice)+"\n"+"Stock bought: "+str(sellPiece)+"\n"+"Your budget is now: "+str(self.budget)+"\n"+"Your portfolio: "+str(self.Portfolio)+"\n"+"Your cash: "+str(self.cash)
-                send_message(message)
+                # send_message(message)
                 self.checkCash()
                 self.latestBoughts[symbol] = []
             else:
@@ -146,6 +146,7 @@ class Robot:
                 print("Your budget is now " + str(self.budget) + " your portfolio " + str(
                     self.Portfolio) + "your cash : " + str(self.cash))
                 print("*************")
+
 
     def checkCash(self):
         if self.budget > self.initialBudget:
@@ -157,11 +158,11 @@ class Robot:
         for i in range(len(datas[self.stocks[0]])):
             for s in (self.stocks):
                 sgn = Signals(datas[s], i)
-                if sgn.buysignalSMA() | sgn.buysignalMACD() | sgn.buysignalRSI():
-                    self.buy(datas[s], i, s)
+                if sgn.buysignalSMA() | sgn.buysignalMACD():
+                    self.buy(datas[s],i,s)
                 elif sgn.sellsignalSMA() | sgn.sellsignalRSI():
                     self.sell(datas[s], i, s)
-                time.sleep(.3)
+                # time.sleep(0.02)
         latests = self.getLastPrice(datas)
         return self.budget, self.Portfolio, self.cash, latests
 

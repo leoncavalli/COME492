@@ -108,10 +108,9 @@ def lstmForecast(stock,fromdate,todate,period):
     myfigure=go.Figure(data=data)
 
     myfigure.update_layout(
-        margin=dict(l=20, r=0, t=80, b=50),
-        title_text=stock+ " FORECAST MODEL",
-        xaxis_title = "Dates",
-        yaxis_title = "Close Price",
+        showlegend=False,
+        margin=dict(l=25, r=25, t=80, b=40  ),
+      
         
     )
     myfigurejson=myfigure.to_json()

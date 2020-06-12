@@ -26,7 +26,7 @@ $(document).ready(function () {
 
 
   finalportfolio = JSON.parse(finalportfolio.replace(/&quot;/g, '"'));
-  latests=JSON.parse(latests.replace(/&quot;/g,'"'));
+  latests = JSON.parse(latests.replace(/&quot;/g, '"'));
 
   Object.keys(finalportfolio).forEach(key => {
     if (finalportfolio[key] === 0) {
@@ -34,9 +34,10 @@ $(document).ready(function () {
     }
   });
 
-  let currentvalue=0;
-  Object.keys(finalportfolio).forEach(key=>{
-      currentvalue+=latests[key]*finalportfolio[key];
+  let currentvalue = 0;
+  
+  Object.keys(finalportfolio).forEach(key => {
+    currentvalue += latests[key] * finalportfolio[key];
   })
   let currentValueStr = currentvalue.toLocaleString(
     undefined,
@@ -52,8 +53,7 @@ $(document).ready(function () {
   stocks = Object.keys(finalportfolio);
   stockquantity = Object.values(finalportfolio);
 
-  if (stocks.length > 0)
-   {
+  if (stocks.length > 0) {
     var ctx = document.getElementById('myChart');
     data = {
       datasets: [{
@@ -64,7 +64,7 @@ $(document).ready(function () {
       labels: stocks
     };
     var myDoughnutChart = new Chart(ctx, {
-      type: 'pie',  
+      type: 'pie',
       data: data,
     });
   }

@@ -18,7 +18,11 @@ urlpatterns=[
     path('traderobot/',TradeRobot,name="TradeRobot"),
     path('traderobot/results',TradeRobotResult,name="TradeRobotResult"),
     path('simpleapi/',simpleapi),  
-    path('simpleapi2/',simpleapi2)
+    path('simpleapi2/',simpleapi2),
+    path('simpleapi3/',simpleapi3),
+
+
+
 
 
 
