@@ -92,18 +92,20 @@ class Signals:
 
 
 class Robot:
-    def __init__(self, stocks, budget):
+    def __init__(self, stocks, budget,fromdate,todate):
         self.stocks = stocks
         self.initialBudget = budget
         self.budget = budget
         self.cash = 0
         self.Portfolio = {p: 0 for p in stocks}
         self.latestBoughts = {x: [] for x in stocks}
+        self.fromdate=fromdate
+        self.todate=todate
 
     def getStockData(self):
         stocks = {p: None for p in self.stocks}
         for i in range(len(self.stocks)):
-            stok = getData(self.stocks[i], fromdate='01/04/2019', todate='01/01/2020')
+            stok = getData(self.stocks[i], fromdate=self.fromdate, todate=self.todate)
             stocks[self.stocks[i]] = stok
 
         return stocks

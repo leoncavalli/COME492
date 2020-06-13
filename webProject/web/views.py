@@ -119,7 +119,7 @@ def TradeRobotResult(request):
     trdate1  =  request.session['trdate1']
     trdate2  =  request.session['trdate2'] 
     trbudget =  request.session['trbudget']
-    app = trader.Robot(trstock,int(trbudget))
+    app = trader.Robot(trstock,int(trbudget),trdate1,trdate2)
     vals=app.run()  
     finalBudget=vals[0]
     finalPortfolio=json.dumps(vals[1])
@@ -160,7 +160,9 @@ def simpleapi3(stockdata):
         data=json.loads(stockdata.body)
         stocks=data['selectedItems']
         budget=data['budget']
-        app = trader.Robot(stocks,int(budget))
+        fromdate=data['fromdate']
+        todate=data['todate']
+        app = trader.Robot(stocks,int(budget),fromdate,todate)
         values=app.run()  
         jsondata=json.dumps({'budget':values[0],'portfolio':values[1],'cash':values[2],'latests':values[3]})
         return Response(json.loads(jsondata))
