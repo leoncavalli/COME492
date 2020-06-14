@@ -50,9 +50,8 @@ $(document).ready(function(){
         }
       });
       
-      var drp = $('.date-picker-2').data('daterangepicker');
+      var drp = $('.date-picker').data('daterangepicker');
       drp.setStartDate(departpicker);
-      drp.setEndDate(departpicker);
     });
     
     

@@ -30,20 +30,58 @@
 
             <div class="col-md-6 col-sm-12 mt-3">
                 <div class="p-3 stat text-center">
-                    <h3 class="font-weight-light">Profit</h3>
+                    <h3 class="font-weight-light">Profit&Loss</h3>
                     <hr>
                     <div class="chart" id="profitchart" data-percent="0"><span class="statvalue">47%</span></div>
                 </div>
             </div>
             <div class="col-md-6 col-sm-12 mt-3">
                 <div class="p-3 stat text-center h-100">
-                    <h3 class="font-weight-light">Profit</h3>
+                    <h3 class="font-weight-light">Portfolio Chart</h3>
                     <hr>
                     <div id="chartjs-wrapper"><canvas id="myChart"></canvas></div>
                 </div>
 
             </div>
         </div>
+</section>
+<section class="bg-light">
+    <div class="container p-5 text-center">
+    <h1 class="font-weight-light ">DESCRIPTIONS</h1>
+    <hr style="width:30%;background-color:#64a19d;border-width: 0.25rem;">
+    <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">Keyword</th>
+            <th scope="col">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Initial Budget</td>
+            <td>The budget specified at previous page.</td>
+
+          </tr>
+          <tr>
+            <td>Final Budget</td>
+            <td>The final money after buy&sell operations.<i>Not includes portfolio value</i></td>
+          </tr>
+          <tr>
+            <td>Portfolio Value</td>
+            <td>Value of stocks in users portfolio.Calculated as <b>stock quantity * latest price of stock</b>.</td>
+          </tr>
+          <tr>
+            <td>Profit&Loss</td>
+            <td>Percentage representation of profit or loss.<i>Not includes portfolio value</i> </td>
+          </tr>
+          <tr>
+            <td>Portfolio Chart</td>
+            <td>If there are is any stock left in portfolio the distribution of stocks shown in pie chart.</td>
+          </tr>
+         
+        </tbody>
+      </table>
+</div>
 </section>
 <script>
     var latestPrice = "{{latestPrice}}";

@@ -20,7 +20,7 @@
               <h2>Stock </h2>
               <hr>
               <div style='text-align:center; margin: 0 0; margin-top:1em;display:block;'>
-                <select name="stock" class="ui dropdown w-100 text-center" id="selecto">
+                <select name="stock" class="ui dropdown w-100 text-center" id="selecto" >
                   <option value="">Stock</option>
                   {% for s in stocks %}
                   <option value={{s.0}}>{{s.1}}</option>
@@ -28,7 +28,7 @@
                 </select>
 
               </div>
-              <div class="mt-5"><a href="https://www.worldometers.info/coronavirus/"
+              <div class="mt-5"><a href="/currencies"
                   class="btn w-100 btn-secondary">Click here for Live Stock Prices</a></div>
             </div>
             <div class="col-md-6">
@@ -122,6 +122,17 @@
 
     </form>
   </div>
+</section>
+<section class="bg-light">
+  <div class="container p-5 text-center">
+    <hr style="width:30%;background-color:#64a19d;border-width: 0.25rem;">
 
+  <blockquote class="blockquote text-center w-75 mx-auto">
+    <p class="mb-0 font-weight-light" style="font-size: 1.4rem;">“The development of full <b>artificial intelligence</b> could spell the end of the human race….It would take off on its own, and re-design itself at an ever increasing rate. Humans, who are limited by slow biological evolution, couldn't compete, and would be superseded.”</p>
+    <footer class="blockquote-footer p-3" style="font-size: 1.2rem;">Stephen Hawking</footer>
+  </blockquote>
+  <hr style="width:30%;background-color:#64a19d;border-width: 0.25rem;">
+
+</div>
 </section>
 {% endblock content %}

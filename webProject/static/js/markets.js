@@ -36,11 +36,11 @@ if (window.location.href.indexOf('stocks') > -1) {
 //If user in currencies page
 if (window.location.href.indexOf('currencies') > -1) {
   var currency = "USDTRY";
-  var symbol = `FX:${currency}`;
+  var symbol = `FX_IDC:${currency}`;
   createGraph(symbol);
   $('#stckPgBtn').click(function (e) {
     var currency = $('#livestock #selecto').val();
-    var symbol = `FX:${currency}`;
+    var symbol = `FX_IDC:${currency}`;
     createGraph(symbol);
   });
 }

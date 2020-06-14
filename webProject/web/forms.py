@@ -16,8 +16,7 @@ CRYPTO=CRYPTO.values.tolist()
 PERIODS=[
     ('Daily'),
     ('Weekly'),
-    ('Monthly'),
-    ('Yearly')]
+    ('Monthly')]
 
 METRICS=[('R2'),
     ('MSE'),
